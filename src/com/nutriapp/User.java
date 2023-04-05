@@ -1,6 +1,9 @@
 package com.nutriapp;
 import java.time.LocalDate;
 import java.time.Period;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class User {
     private String name;
@@ -85,4 +88,45 @@ public class User {
                 "Birthdate: " + birthdate + "\n" +
                 "Goal: " + goal + "\n";
     }
+
+    public void saveUser() throws IOException {
+        // check if a file ../../../data/user.csv exists
+        // if it doesnt exist, create it
+        String filePath = "../../../data/user.csv";
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("An error occurred while creating the file.");
+                e.printStackTrace();
+            }
+        }
+        // write the user's data to the file
+        // name, height, weight, birthdate, goal
+        // comma seperate all the data, one user per line
+        try (FileWriter writer = new FileWriter(filePath, true)) {
+            writer.write(String.format(".user {\n\tname: \"%s\";\n\theight: %dcm;\n\tweight: %.2fkg;\n\tbirthdate: \"%s\";\n\tgoal: \"%d\";\n}\n",
+                    this.name,
+                    this.height,
+                    this.weight,
+                    this.birthdate,
+                    this.goal.getValue()
+            ));
+        }
+
+    }
+
+    // function to delete a user from the ../../../../data/user.csv file (if it exists)
+    public void deleteUser() throws IOException {
+        String filePath = "../../../data/user.csv";
+
+        // find the line with the users name and delete it, then shift all the other lines up
+        // if the user is not found, do nothing
+        
+
+    }
+
+
 }
