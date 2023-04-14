@@ -1,3 +1,4 @@
+package com.nutriapp;
 import java.util.Scanner;
 
 public class NutriAppUI {
