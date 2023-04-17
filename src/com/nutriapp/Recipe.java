@@ -1,55 +1,43 @@
 package com.nutriapp;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Recipe {
-    private String name;
-    private List<Ingredient> ingredients;
-    private String instructions;
-
-    public Recipe(String name, List<Ingredient> ingredients, String instructions) {
-        this.name = name;
-        this.ingredients = ingredients;
-        this.instructions = instructions;
+class Recipe extends Food {
+    private List<Food> ingredients = new ArrayList<>();
+    private int stock;
+  
+    public Recipe(String name, int caloriesPerUnit, int fatPerUnit, int proteinPerUnit, int fiberPerUnit, int carbsPerUnit) {
+        super(name, caloriesPerUnit, fatPerUnit, proteinPerUnit, fiberPerUnit, carbsPerUnit);
+        this.ingredients = new ArrayList<>();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getStock() {
+        return stock;
     }
-
-    public String getName() {
-        return name;
+  
+    public void setStock(int stock) {
+        this.stock = stock;
     }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+  
+    public int calculateTotalCalories(User user) {
+      int totalCalories = 0;
+      for (Food ingredient : ingredients) {
+        totalCalories += ingredient.calculateTotalCalories(user);
+      }
+      return totalCalories;
     }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+  
+    public void addIngredient(Food ingredient) {
+      this.ingredients.add(ingredient);
     }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+  
+    public void removeIngredient(Food ingredient) {
+      this.ingredients.remove(ingredient);
     }
-
-    public String getInstructions() {
-        return instructions;
+  
+    public List<Food> getIngredients() {
+      return this.ingredients;
     }
-
-    public double getCalories() {
-        double totalCalories = 0;
-        for (Ingredient ingredient : ingredients) {
-            totalCalories += ingredient.getCalories();
-        }
-        return totalCalories;
-    }
-
-    public void prepare(double portionSize) {
-        System.out.println("Preparing recipe: " + name);
-        for (Ingredient ingredient : ingredients) {
-            double amount = ingredient.getStock() * portionSize / 100;
-            ingredient.use(amount);
-        }
-    }
-}
+  }
+  

@@ -1,4 +1,5 @@
-public class NutriApp {
+package com.nutriapp;
+public class Nutriapp {
     private NutriAppUI ui = new NutriAppUI();
 
     public void run() {

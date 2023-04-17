@@ -2,6 +2,7 @@ package com.nutriapp;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 public class User {
     private String name;
@@ -10,12 +11,14 @@ public class User {
     private LocalDate birthdate;
     private Goal goal;
     private double dailyCalorieIntake;
+    private List<Food> foods;
 
-    public User(String name, int height, double weight, LocalDate birthdate, Goal goal) {
+    public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods) {
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.birthdate = birthdate;
+        this.foods = foods;
         this.goal = goal;
         this.goal.update(this);
     }
@@ -50,6 +53,10 @@ public class User {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
     }
 
     public void setGoal(Goal goal) {
