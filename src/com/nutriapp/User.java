@@ -1,5 +1,7 @@
 package com.nutriapp;
+
 import java.time.LocalDate;
+import java.time.Period;
 
 public class User {
     private String name;
@@ -7,6 +9,7 @@ public class User {
     private double weight;
     private LocalDate birthdate;
     private Goal goal;
+    private double dailyCalorieIntake;
 
     public User(String name, int height, double weight, LocalDate birthdate, Goal goal) {
         this.name = name;
@@ -14,6 +17,7 @@ public class User {
         this.weight = weight;
         this.birthdate = birthdate;
         this.goal = goal;
+        this.goal.update(this);
     }
 
     public String getName() {
@@ -49,16 +53,27 @@ public class User {
     }
 
     public void setGoal(Goal goal) {
-        this.goal = goal;
+        if (goal != null) {
+            this.goal = goal;
+            goal.update(this);
+        } else {
+            throw new IllegalArgumentException("Goal cannot be null.");
+        }
     }
 
+    public void setDailyCalorieIntake(double dailyCalorieIntake) {
+        this.dailyCalorieIntake = dailyCalorieIntake;
+    }
+    
+    
+    
     public double getBMR() {
         double bmr = 0;
-        if (goal == Goal.LOSE_WEIGHT) {
+        if (goal instanceof LoseWeight) {
             bmr = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * getAge());
-        } else if (goal == Goal.GAIN_WEIGHT) {
+        } else if (goal instanceof GainWeight) {
             bmr = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * getAge());
-        } else {
+        } else if (goal instanceof MaintainWeight) {
             bmr = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * getAge());
         }
         return bmr;
@@ -66,12 +81,11 @@ public class User {
 
     public double getDailyCalorieIntake() {
         double bmr = getBMR();
-        double dailyCalorieIntake = 0;
-        if (goal == Goal.LOSE_WEIGHT) {
+        if (goal instanceof LoseWeight) {
             dailyCalorieIntake = bmr * 0.8;
-        } else if (goal == Goal.GAIN_WEIGHT) {
+        } else if (goal instanceof GainWeight) {
             dailyCalorieIntake = bmr * 1.2;
-        } else {
+        } else if (goal instanceof MaintainWeight) {
             dailyCalorieIntake = bmr;
         }
         return dailyCalorieIntake;
