@@ -1,4 +1,9 @@
 package com.nutriapp;
-public class Meal {
-    
+
+import java.util.List;
+
+public interface Meal {
+    String getName();
+    List<Recipe> getRecipes();
+    void prepare(User user);
 }
