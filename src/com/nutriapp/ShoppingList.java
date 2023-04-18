@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
+
+/*
+ * This class is responsible for storing a user's shopping list.
+ */
 public class ShoppingList implements StockObserver {
     private List<Ingredient> ingredients;
     private List<Recipe> recipes;
