@@ -27,7 +27,7 @@ class Recipe extends Food {
       }
       return totalCalories;
     }
-  
+
     public void addIngredient(Food ingredient) {
       this.ingredients.add(ingredient);
     }

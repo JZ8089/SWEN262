@@ -1,21 +1,45 @@
 package com.nutriapp;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Ingredient extends Food {
     private int stock;
+    private List<StockObserver> observers;
+    private double lowStockThreshold;
 
     public Ingredient(String name, int caloriesPerUnit, int fatPerUnit, int proteinPerUnit, int fiberPerUnit, int carbsPerUnit, int stock) {
         super(name, caloriesPerUnit, fatPerUnit, proteinPerUnit, fiberPerUnit, carbsPerUnit);
         this.stock = stock;
+        this.observers = new ArrayList<>();
     }
 
     public int getStock() {
         return stock;
     }
 
+
     public void setStock(int stock) {
         this.stock = stock;
+        notifyObservers();
+    }
+
+    private void notifyObservers() {
+        for (StockObserver observer : observers) {
+            observer.updateStock(this);
+        }
+    }
+
+    public void addObserver(StockObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(StockObserver observer) {
+        observers.remove(observer);
+    }
+
+    public double getLowStockThreshold() {
+        return lowStockThreshold;
     }
 
     @Override
