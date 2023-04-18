@@ -1,10 +1,9 @@
 package com.nutriapp;
 public class Nutriapp {
     private NutriAppUI ui = new NutriAppUI();
-
     public void run() {
         int choice = 0;
-        while (choice != 5) {
+        while (choice != 6) {
             ui.displayMenu();
             choice = ui.getUserChoice();
             switch (choice) {
@@ -17,10 +16,13 @@ public class Nutriapp {
                 case 3:
                     ui.displayWorkoutForm();
                     break;
-                case 4:
-                    ui.displayUserHistory();
+                case 4: 
+                    ui.displayWorkoutDurationForm();
                     break;
                 case 5:
+                    ui.displayUserHistory();
+                    break;
+                case 6:
                     ui.displayExitMessage();
                     break;
                 default:

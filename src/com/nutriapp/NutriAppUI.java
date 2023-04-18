@@ -9,8 +9,9 @@ public class NutriAppUI {
         System.out.println("1. Create a new user");
         System.out.println("2. Add a new meal");
         System.out.println("3. Add a new workout");
-        System.out.println("4. View user history");
-        System.out.println("5. Exit");
+        System.out.println("4. Add workout duration");
+        System.out.println("5. View user history");
+        System.out.println("6. Exit");
     }
 
     public int getUserChoice() {
@@ -52,6 +53,15 @@ public class NutriAppUI {
         String date = scanner.next();
         // Save the workout data to the database
     }
+
+    public void displayWorkoutDurationForm() {
+        System.out.println("Add workout duration");
+        System.out.print("Enter the duration (in hours): ");
+        int duration = scanner.nextInt();
+        // Save the workout duration to the database
+    }
+
+    
 
     public void displayUserHistory() {
         System.out.println("User history");
