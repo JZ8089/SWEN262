@@ -14,15 +14,17 @@ public class User {
     private double dailyCalorieIntake;
     private List<Food> foods;
     private List<WeightObserver> weightObservers;
+    private WorkoutStrategy workoutStrategy;
 
-    public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods) {
+    public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy) {
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.birthdate = birthdate;
         this.foods = foods;
-        this.goal = goal;
         this.weightObservers = new ArrayList<>();
+        this.workoutStrategy = workoutStrategy;
+        this.goal = goal;
         this.goal.update(this);
     }
 
@@ -71,6 +73,14 @@ public class User {
 
     public void unregisterWeightObserver(WeightObserver observer) {
         weightObservers.remove(observer);
+    }
+
+    public int calculateCaloriesBurned(int duration, int intensity) {
+        return workoutStrategy.calculateCaloriesBurned(duration, intensity);
+    }
+
+    public void setWorkoutStrategy(WorkoutStrategy workoutStrategy) {
+        this.workoutStrategy = workoutStrategy;
     }
 
 
