@@ -5,7 +5,7 @@ import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 
-public class User {
+public class User implements StockObserver {
     private String name;
     private int height;
     private double weight;
@@ -15,6 +15,7 @@ public class User {
     private List<Food> foods;
     private List<WeightObserver> weightObservers;
     private WorkoutStrategy workoutStrategy;
+    private List<ShoppingListObserver> shoppingListObservers;
 
     public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy) {
         this.name = name;
@@ -24,6 +25,7 @@ public class User {
         this.foods = foods;
         this.weightObservers = new ArrayList<>();
         this.workoutStrategy = workoutStrategy;
+        this.shoppingListObservers = new ArrayList<>();
         this.goal = goal;
         this.goal.update(this);
     }
@@ -96,6 +98,11 @@ public class User {
     public void setDailyCalorieIntake(double dailyCalorieIntake) {
         this.dailyCalorieIntake = dailyCalorieIntake;
     }
+
+    @Override
+    public void updateStock(Ingredient ingredient) {
+        System.out.println("Need to buy " + ingredient.getName() + " for " + getName());
+    }
     
     
     
@@ -121,6 +128,20 @@ public class User {
             dailyCalorieIntake = bmr;
         }
         return dailyCalorieIntake;
+    }
+
+    public void addShoppingListObserver(ShoppingListObserver observer) {
+        shoppingListObservers.add(observer);
+    }
+
+    public void removeShoppingListObserver(ShoppingListObserver observer) {
+        shoppingListObservers.remove(observer);
+    }
+
+    public void notifyShoppingListObservers(ShoppingList shoppingList) {
+        for (ShoppingListObserver observer : shoppingListObservers) {
+            observer.update(shoppingList);
+        }
     }
 
     public String toString() {
