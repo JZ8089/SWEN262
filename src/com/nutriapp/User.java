@@ -3,6 +3,7 @@ package com.nutriapp;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.ArrayList;
 
 public class User {
     private String name;
@@ -12,6 +13,7 @@ public class User {
     private Goal goal;
     private double dailyCalorieIntake;
     private List<Food> foods;
+    private List<WeightObserver> weightObservers;
 
     public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods) {
         this.name = name;
@@ -20,6 +22,7 @@ public class User {
         this.birthdate = birthdate;
         this.foods = foods;
         this.goal = goal;
+        this.weightObservers = new ArrayList<>();
         this.goal.update(this);
     }
 
@@ -53,11 +56,23 @@ public class User {
 
     public void setWeight(double weight) {
         this.weight = weight;
+        for (WeightObserver observer : weightObservers) {
+            observer.updateWeight(weight);
+        }
     }
 
     public List<Food> getFoods() {
         return foods;
     }
+
+    public void registerWeightObserver(WeightObserver observer) {
+        weightObservers.add(observer);
+    }
+
+    public void unregisterWeightObserver(WeightObserver observer) {
+        weightObservers.remove(observer);
+    }
+
 
     public void setGoal(Goal goal) {
         if (goal != null) {
