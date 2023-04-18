@@ -51,13 +51,13 @@ public class NutriAppUI {
         String intensity = scanner.next();
         System.out.print("Enter the date (YYYY-MM-DD): ");
         String date = scanner.next();
-        // Save the workout data to the database
+        // Save the workout data to the databases
     }
 
-    public void displayWorkoutDurationForm() {
-        System.out.println("Add workout duration");
-        System.out.print("Enter the duration (in hours): ");
-        double duration = scanner.nextDouble();
+    public void displayHoursLeftInDay() {
+        System.out.println("The amount of hours left in the day is");
+        System.out.print("Enter the duration (in second): ");
+        double time = scanner.nextDouble();                
         // Save the workout duration to the database
     }
 

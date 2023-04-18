@@ -16,8 +16,9 @@ public class User implements StockObserver {
     private List<WeightObserver> weightObservers;
     private WorkoutStrategy workoutStrategy;
     private List<ShoppingListObserver> shoppingListObservers;
+    private double dayLength; 
 
-    public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy) {
+    public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy, double dayLength) {
         this.name = name;
         this.height = height;
         this.weight = weight;
@@ -28,6 +29,8 @@ public class User implements StockObserver {
         this.shoppingListObservers = new ArrayList<>();
         this.goal = goal;
         this.goal.update(this);
+        this.dayLength = dayLength;
+        
     }
 
     public String getName() {
@@ -53,6 +56,7 @@ public class User implements StockObserver {
     public int getAge() {
         return Period.between(birthdate, LocalDate.now()).getYears();
     }
+
 
     public void setHeight(int height) {
         this.height = height;

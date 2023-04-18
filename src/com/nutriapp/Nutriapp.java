@@ -17,7 +17,7 @@ public class Nutriapp {
                     ui.displayWorkoutForm();
                     break;
                 case 4: 
-                    ui.displayWorkoutDurationForm();
+                    ui.displayHoursLeftInDay();
                     break;
                 case 5:
                     ui.displayUserHistory();
