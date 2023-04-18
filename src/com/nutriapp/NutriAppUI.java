@@ -57,7 +57,7 @@ public class NutriAppUI {
     public void displayWorkoutDurationForm() {
         System.out.println("Add workout duration");
         System.out.print("Enter the duration (in hours): ");
-        int duration = scanner.nextInt();
+        double duration = scanner.nextDouble();
         // Save the workout duration to the database
     }
 
