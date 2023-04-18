@@ -3,7 +3,10 @@ package com.nutriapp;
 import java.time.LocalDate;
 import java.util.List;
 
-class Day {
+/*
+ * This class is responsible for storing a day's worth of data.
+ */
+public class Day {
     private LocalDate date;
     private double weight;
     private List<Meal> meals;

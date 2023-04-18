@@ -10,6 +10,10 @@ import java.util.List;
 import com.nutriapp.Day;
 import com.nutriapp.User;
 
+
+/*
+ * This class is responsible for saving and loading user history to a CSV file.
+ */
 public class UserHistoryCSV {
     private final String FILENAME = "user_history.csv";
 

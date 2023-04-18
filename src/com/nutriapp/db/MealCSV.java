@@ -4,6 +4,11 @@ import com.nutriapp.Meal;
 
 import java.io.*;
 
+
+/* 
+ * This class is responsible for saving and deleting meals to a CSV file.
+ * it implements the MealDAO interface.
+ */
 public class MealCSV implements MealDAO {
     private String filePath;
 

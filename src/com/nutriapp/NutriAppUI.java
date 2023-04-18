@@ -1,6 +1,12 @@
 package com.nutriapp;
 import java.util.Scanner;
 
+
+/*
+ * This class is responsible for displaying the user interface.
+ * It also handles user input.
+ * it is not complete, and it doesnt actually reference anything. The equivelent of an unplugged controller.
+ */
 public class NutriAppUI {
     private Scanner scanner = new Scanner(System.in);
 

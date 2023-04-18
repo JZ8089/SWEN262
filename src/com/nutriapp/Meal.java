@@ -3,6 +3,12 @@ package com.nutriapp;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+ * This class represents a meal.
+ * A meal is a collection of ingredients.
+ * A meal has a name, calories, fat, protein, fiber, and carbs per unit.
+ */
 public class Meal extends Food {
     private List<Food> ingredients;
 

@@ -1,7 +1,11 @@
 package com.nutriapp;
+
+/*
+ * This class is responsible for running the NutriApp.
+ */ 
 public class Nutriapp {
     private NutriAppUI ui = new NutriAppUI();
-    public void run() {
+    public void main() {
         int choice = 0;
         while (choice != 6) {
             ui.displayMenu();

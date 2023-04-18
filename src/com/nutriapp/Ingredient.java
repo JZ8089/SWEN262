@@ -3,6 +3,11 @@ package com.nutriapp;
 import java.util.List;
 import java.util.ArrayList;
 
+/*
+ * this class represents an ingredient
+ * it is a subclass of Food
+ * it has a stock attribute
+ */
 public class Ingredient extends Food {
     private int stock;
     private List<StockObserver> observers;

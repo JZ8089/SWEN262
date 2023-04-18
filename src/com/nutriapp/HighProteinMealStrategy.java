@@ -4,6 +4,9 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+/*
+ * This class is responsible for creating a meal with high protein.
+ */
 class HighProteinMealStrategy implements MealStrategy {
     public int calculateTotalCalories(List<Food> foods, User user) {
         int totalCalories = 0;

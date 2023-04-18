@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import com.nutriapp.Recipe;
 
+/*
+ * This class is responsible for saving and loading recipes to a CSV file.
+ */
 public class RecipeCSV {
     private static final String FILENAME = "recipes.csv";
 

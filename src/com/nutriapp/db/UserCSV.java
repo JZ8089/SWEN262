@@ -20,7 +20,6 @@ public class UserCSV {
     // name,height,weight,birthdate,goal
 
     // function to create a user (add a new user to users file)
-    // function to create a user (add a new user to users file)
     public static int createUser(User user) throws IOException {
         // create a new file if it doesn't exist
         File file = new File("users.csv");

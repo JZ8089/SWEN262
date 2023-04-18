@@ -2,6 +2,11 @@ package com.nutriapp;
 
 import java.util.List;
 
+
+/*
+ * This class represonts food items.
+ * It is an abstract class because it is not meant to be instantiated.
+ */
 abstract class Food {
     protected String name;
     protected int caloriesPerUnit;

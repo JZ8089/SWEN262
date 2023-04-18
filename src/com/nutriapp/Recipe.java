@@ -3,7 +3,12 @@ package com.nutriapp;
 import java.util.ArrayList;
 import java.util.List;
 
-class Recipe extends Food {
+/*
+ * This class represents a recipe.
+ * A recipe is a food that is made up of other foods.
+ * 
+ */
+public class Recipe extends Food {
     private List<Food> ingredients = new ArrayList<>();
     private int stock;
   

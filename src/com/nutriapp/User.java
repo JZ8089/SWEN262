@@ -5,6 +5,13 @@ import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 
+/*
+ * This class represents a user.
+ * A user has a name, height, weight, birthdate, goal, daily calorie intake, foods, 
+ * weight observers, workout strategy, shopping list observers, and day length.
+ * A user can add a food, remove a food, add a weight observer, remove a weight
+ * observer, add a shopping list observer, remove a shopping list observer, and update their goal.
+ */
 public class User implements StockObserver {
     private String name;
     private int height;

@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * This class is responsible for storing a user's history.
+ */
 public class History {
     private List<Day> days;
 
