@@ -5,6 +5,7 @@ import java.util.List;
 
 /*
  * This class is responsible for storing a day's worth of data.
+ * Allow current date, weight, list of meals, and workouts the user has done to be saved.
  */
 public class Day {
     private LocalDate date;

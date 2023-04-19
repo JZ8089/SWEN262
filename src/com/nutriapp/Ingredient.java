@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * this class represents an ingredient
  * it is a subclass of Food
  * it has a stock attribute
+ * Has an observer that notifies when a stock is low in stock to be added to shoppinglist
+ * Allows to remove/add/get an ingredient
  */
 public class Ingredient extends Food {
     private int stock;

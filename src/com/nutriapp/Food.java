@@ -6,6 +6,7 @@ import java.util.List;
 /*
  * This class represonts food items.
  * It is an abstract class because it is not meant to be instantiated.
+ * Food has name, caloriesPerUnit, fatPerUnit, proteinPerUnit, fiberPerUnit, and carbsPerUnit
  */
 abstract class Food {
     protected String name;

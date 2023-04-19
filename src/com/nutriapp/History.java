@@ -6,6 +6,8 @@ import java.util.List;
 
 /*
  * This class is responsible for storing a user's history.
+ * This class takes in the day's worth of data into a user's history by adding the day.
+ * Method getDay to get a specific day's history
  */
 public class History {
     private List<Day> days;

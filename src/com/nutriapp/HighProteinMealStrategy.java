@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 /*
  * This class is responsible for creating a meal with high protein.
+ * Class takes in a list of foods and the user that is taking the food.
+ * Method to createMeal that takes in a user that allows user to create a high protein meal
  */
 class HighProteinMealStrategy implements MealStrategy {
     public int calculateTotalCalories(List<Food> foods, User user) {

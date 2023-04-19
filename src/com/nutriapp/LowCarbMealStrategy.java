@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /*
  * This class is responsible for creating a meal with low carbs.
+ * LowCarbMeal option that allows to create a low carb meal and calculate the total
+ * calories for the meal
  */
 class LowCarbMealStrategy implements MealStrategy {
     public int calculateTotalCalories(List<Food> foods, User user) {

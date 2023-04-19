@@ -8,6 +8,7 @@ import java.util.List;
  * This class represents a meal.
  * A meal is a collection of ingredients.
  * A meal has a name, calories, fat, protein, fiber, and carbs per unit.
+ * Allow to add ingredient, remove ingredient for a meal
  */
 public class Meal extends Food {
     private List<Food> ingredients;

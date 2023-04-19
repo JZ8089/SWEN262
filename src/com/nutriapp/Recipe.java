@@ -6,6 +6,8 @@ import java.util.List;
 /*
  * This class represents a recipe.
  * A recipe is a food that is made up of other foods.
+ * Recipe takes in the name of the recipe, caloie, fat, protein, fiber, carbs per unit
+ * can add/remove ingredient and calculate total calories and set a stock, getstock amount
  * 
  */
 public class Recipe extends Food {

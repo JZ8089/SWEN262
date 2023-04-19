@@ -1,7 +1,7 @@
 package com.nutriapp;
 
 /*
- * This interface is responsible for calculating the calories burned during a workout.
+ * This class is the highest intensity workout allowing user to burn calories the fastest
  */
 public class HighIntensityWorkout implements WorkoutStrategy {
     public int calculateCaloriesBurned(int duration, int intensity) {

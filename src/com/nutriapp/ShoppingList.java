@@ -8,6 +8,7 @@ import java.util.HashSet;
 
 /*
  * This class is responsible for storing a user's shopping list.
+ * Observers that updates shoppinglist whenever ingredient is low in stock
  */
 public class ShoppingList implements StockObserver {
     private List<Ingredient> ingredients;
