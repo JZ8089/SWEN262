@@ -5,7 +5,13 @@ package com.nutriapp;
  */ 
 public class Nutriapp {
     private NutriAppUI ui = new NutriAppUI();
-    public void main() {
+
+    public static void main(String[] args) {
+        Nutriapp app = new Nutriapp();
+        app.run();
+    }
+
+    public void run() {
         int choice = 0;
         while (choice != 6) {
             ui.displayMenu();
