@@ -10,14 +10,13 @@ import java.io.*;
  * it implements the MealDAO interface.
  */
 public class MealCSV implements MealDAO {
-    private String filePath;
+    private static String filePath;
 
     public MealCSV(String filePath) {
-        this.filePath = filePath;
+        MealCSV.filePath = filePath;
     }
 
-    @Override
-    public void saveMeal(Meal meal) {
+    public static void saveMeal(Meal meal) {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath, true)))) {
             writer.println(meal.getName() + "," + meal.getCaloriesPerUnit() + "," + meal.getFatPerUnit() + ","
                     + meal.getProteinPerUnit() + "," + meal.getFiberPerUnit() + "," + meal.getCarbsPerUnit());

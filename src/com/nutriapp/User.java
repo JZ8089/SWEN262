@@ -1,8 +1,11 @@
 package com.nutriapp;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 /*
@@ -14,7 +17,7 @@ import java.util.ArrayList;
  */
 public class User implements StockObserver {
     private String name;
-    private int height;
+    private double height;
     private double weight;
     private LocalDate birthdate;
     private Goal goal;
@@ -23,9 +26,9 @@ public class User implements StockObserver {
     private List<WeightObserver> weightObservers;
     private WorkoutStrategy workoutStrategy;
     private List<ShoppingListObserver> shoppingListObservers;
-    private double dayLength; 
+    private int dayLength;
 
-    public User(String name, int height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy, double dayLength) {
+    public User(String name, double height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy, double dayLength) {
         this.name = name;
         this.height = height;
         this.weight = weight;
@@ -35,16 +38,14 @@ public class User implements StockObserver {
         this.workoutStrategy = workoutStrategy;
         this.shoppingListObservers = new ArrayList<>();
         this.goal = goal;
-        this.goal.update(this);
-        this.dayLength = dayLength;
-        
+        // this.goal.update(this);
     }
 
     public String getName() {
         return name;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -65,7 +66,7 @@ public class User implements StockObserver {
     }
 
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
@@ -78,6 +79,10 @@ public class User implements StockObserver {
 
     public List<Food> getFoods() {
         return foods;
+    }
+
+    public int getDayLength() {
+        return dayLength;
     }
 
     public void registerWeightObserver(WeightObserver observer) {
@@ -94,6 +99,10 @@ public class User implements StockObserver {
 
     public void setWorkoutStrategy(WorkoutStrategy workoutStrategy) {
         this.workoutStrategy = workoutStrategy;
+    }
+
+    public WorkoutStrategy getWorkoutStrategy() {
+        return workoutStrategy;
     }
 
 

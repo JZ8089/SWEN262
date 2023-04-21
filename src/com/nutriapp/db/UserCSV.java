@@ -40,7 +40,7 @@ public class UserCSV {
 
         // write the user to the file
         FileWriter writer = new FileWriter("users.csv", true);
-        writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal());
+        writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal() + "," + user.getFoods() + "," + user.getWorkoutStrategy() + "," + user.getDayLength() + System.lineSeparator());
         writer.close();
         return 1;
     }
@@ -87,7 +87,7 @@ public class UserCSV {
         return 1;
     }
 
-    public static int updateUser(User user) {
+    public static int updateUser(User updatedUser, User user) {
         // check if file exists, return 0 if it doesn't
         File file = new File("users.csv");
         if (!file.exists()) {
@@ -105,7 +105,7 @@ public class UserCSV {
                 String[] parts = line.split(",");
                 if (parts[0].equals(user.getName())) {
                     userExists = true;
-                    newFileContent.append(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal()).append(System.lineSeparator());
+                    newFileContent.append(updatedUser.getName() + "," + updatedUser.getHeight() + "," + updatedUser.getWeight() + "," + updatedUser.getBirthdate() + "," + updatedUser.getGoal() + "," + updatedUser.getDayLength()).append(System.lineSeparator());
                 } else {
                     newFileContent.append(line).append(System.lineSeparator());
                 }
@@ -127,6 +127,5 @@ public class UserCSV {
 
         return 1;
     }
-
 
 }

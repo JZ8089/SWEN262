@@ -20,7 +20,7 @@ public class UserHistoryCSV {
 
     public void saveUserHistory(User user) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILENAME, true))) {
-            for (Day day : user.getHistory().getDays()) {
+            for (Day day : user.getHistory()) {
                 String line = user.getName() + "," + day.getDate() + "," + day.getWeight() + "," + day.getMeals() + "," + day.getWorkouts() + "\n" ;
                 writer.write(line);
             }
