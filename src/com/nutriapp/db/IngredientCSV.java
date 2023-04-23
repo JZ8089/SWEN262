@@ -12,7 +12,7 @@ public class IngredientCSV {
     private static final String FILENAME = "data/ingredients.csv";
 
     public static void saveIngredients(List<Ingredient> ingredients) {
-        try (FileWriter fw = new FileWriter(FILENAME);
+        try (FileWriter fw = new FileWriter(FILENAME, true); // Pass 'true' to enable append mode
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (Ingredient ingredient : ingredients) {

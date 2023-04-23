@@ -12,7 +12,7 @@ public class RecipeCSV {
     private static final String FILENAME = "data/recipes.csv";
 
     public static void saveRecipes(List<Recipe> recipes) {
-        try (FileWriter fw = new FileWriter(FILENAME);
+        try (FileWriter fw = new FileWriter(FILENAME, true); // Pass 'true' to enable append mode
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (Recipe recipe : recipes) {
@@ -22,6 +22,7 @@ public class RecipeCSV {
             e.printStackTrace();
         }
     }
+    
 
     // listRecipes() returns a list of recipes as an array of strings, one recipe per string
     public static String[] listRecipes() {
