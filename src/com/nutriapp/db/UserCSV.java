@@ -22,7 +22,7 @@ public class UserCSV {
     // function to create a user (add a new user to users file)
     public static int createUser(User user) throws IOException {
         // create a new file if it doesn't exist
-        File file = new File("users.csv");
+        File file = new File("data/users.csv");
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -39,7 +39,7 @@ public class UserCSV {
         scanner.close();
 
         // write the user to the file
-        FileWriter writer = new FileWriter("users.csv", true);
+        FileWriter writer = new FileWriter("data/users.csv", true);
         writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal() + "," + user.getFoods() + "," + user.getWorkoutStrategy() + "," + user.getDayLength() + System.lineSeparator());
         writer.close();
         return 1;
@@ -47,7 +47,7 @@ public class UserCSV {
 
     public static int removeUser(User user) {
         // check if file exists, return 0 if it doesn't
-        File file = new File("users.csv");
+        File file = new File("data/users.csv");
         if (!file.exists()) {
             return 0;
         }
@@ -75,7 +75,7 @@ public class UserCSV {
             }
 
             // Write the new content to the file
-            FileWriter writer = new FileWriter("users.csv");
+            FileWriter writer = new FileWriter("data/users.csv");
             writer.write(newFileContent.toString());
             writer.close();
 
@@ -89,7 +89,7 @@ public class UserCSV {
 
     public static int updateUser(User updatedUser, User user) {
         // check if file exists, return 0 if it doesn't
-        File file = new File("users.csv");
+        File file = new File("data/users.csv");
         if (!file.exists()) {
             return 0;
         }
@@ -117,7 +117,7 @@ public class UserCSV {
             }
             
             // Write the new content to the file
-            FileWriter writer = new FileWriter("users.csv");
+            FileWriter writer = new FileWriter("data/users.csv");
             writer.write(newFileContent.toString());
             writer.close();
 

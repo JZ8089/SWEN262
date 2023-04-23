@@ -1,7 +1,9 @@
 package com.nutriapp;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +12,66 @@ import java.util.Scanner;
 import com.nutriapp.db.MealCSV;
 import com.nutriapp.db.UserCSV;
 
-
-/*
- * This class is responsible for displaying the user interface.
- * It also handles user input.
- * it is not complete, and it doesnt actually reference anything. The equivelent of an unplugged controller.
- */
 public class NutriAppUI {
     private Scanner scanner = new Scanner(System.in);
-    private List<User> users = new ArrayList<>(); // This is where we will store the users (client-side)
+    private List<User> users = new ArrayList<>();
+    private User currentUser = null;
+
+    public void initialPrompt() {
+        System.out.println("Welcome to NutriApp!");
+        System.out.println("1. Create a new user");
+        System.out.println("2. Log in as a user");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            displayUserForm();
+        } else if (choice == 2) {
+            loginUser();
+        } else {
+            System.out.println("Invalid choice, please try again.");
+            initialPrompt();
+        }
+    }
+
+    public void loginUser() {
+        System.out.print("Enter your username: ");
+        String username = scanner.next();
+        User user = findUserByUsername(username);
+        if (user == null) {
+            System.out.println("User not found. Please try again.");
+            loginUser();
+        } else {
+            currentUser = user;
+            System.out.println("Logged in as: " + currentUser.getName());
+            checkDailyLogin();
+        }
+    }
+
+    private User findUserByUsername(String username) {
+        // You can implement this method to find a user by their username in the database.
+        // For now, I'll just search the local 'users' list.
+        for (User user : users) {
+            if (user.getName().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private void checkDailyLogin() {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("Current date and time: " + now);
+        System.out.print("Have you logged in today? (yes/no): ");
+        String response = scanner.next();
+        if (response.equalsIgnoreCase("no")) {
+            System.out.print("Enter your current weight (lbs): ");
+            double weight = scanner.nextDouble();
+            // Save the user's weight to the database
+            // Uncomment the line below and replace with the appropriate code when ready
+            // saveWeightToDatabase(currentUser, weight);
+        }
+        displayMenu();
+    }
 
     public void displayMenu() {
         System.out.println("Welcome to NutriApp!");

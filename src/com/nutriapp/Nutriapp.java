@@ -12,6 +12,7 @@ public class Nutriapp {
     }
 
     public void run() {
+        ui.initialPrompt();
         int choice = 0;
         while (choice != 6) {
             ui.displayMenu();
