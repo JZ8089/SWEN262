@@ -26,15 +26,15 @@ class LowCarbMealStrategy implements MealStrategy {
 
     @Override
     public List<Food> createMeal(User user) {
-    List<Food> lowCarbFoods = new ArrayList<>();
+        List<Food> lowCarbFoods = new ArrayList<>();
 
-    for (Food food : user.getFoods()) {
-        if (food.getCarbsPerUnit() < 10) { // only add foods with less than 10 carbs per unit
-            lowCarbFoods.add(food);
-        }
+        // for (Food food : user.getFoods()) {
+        //     if (food.getCarbsPerUnit() < 10) { // only add foods with less than 10 carbs per unit
+        //         lowCarbFoods.add(food);
+        //     }
+        // }
+
+        return lowCarbFoods;
     }
-
-    return lowCarbFoods;
-}
 
 }

@@ -28,14 +28,14 @@ public class User implements StockObserver {
     private List<ShoppingListObserver> shoppingListObservers;
     private int dayLength;
 
-    public User(String name, double height, double weight, LocalDate birthdate, Goal goal, List<Food> foods, WorkoutStrategy workoutStrategy, double dayLength) {
+    public User(String name, double height, double weight, LocalDate birthdate, Goal goal) {
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.birthdate = birthdate;
-        this.foods = foods;
+        // this.foods = foods;
         this.weightObservers = new ArrayList<>();
-        this.workoutStrategy = workoutStrategy;
+        // this.workoutStrategy = workoutStrategy;
         this.shoppingListObservers = new ArrayList<>();
         this.goal = goal;
         // this.goal.update(this);
@@ -77,9 +77,9 @@ public class User implements StockObserver {
         }
     }
 
-    public List<Food> getFoods() {
-        return foods;
-    }
+    // public List<Food> getFoods() {
+    //     return foods;
+    // }
 
     public int getDayLength() {
         return dayLength;
@@ -97,13 +97,13 @@ public class User implements StockObserver {
         return workoutStrategy.calculateCaloriesBurned(duration, intensity);
     }
 
-    public void setWorkoutStrategy(WorkoutStrategy workoutStrategy) {
-        this.workoutStrategy = workoutStrategy;
-    }
+    // public void setWorkoutStrategy(WorkoutStrategy workoutStrategy) {
+    //     this.workoutStrategy = workoutStrategy;
+    // }
 
-    public WorkoutStrategy getWorkoutStrategy() {
-        return workoutStrategy;
-    }
+    // public WorkoutStrategy getWorkoutStrategy() {
+    //     return workoutStrategy;
+    // }
 
 
     public void setGoal(Goal goal) {

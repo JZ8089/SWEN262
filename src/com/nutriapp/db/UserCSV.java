@@ -2,7 +2,13 @@ package com.nutriapp.db;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
+
+import com.nutriapp.GainWeight;
+import com.nutriapp.Goal;
+import com.nutriapp.LoseWeight;
+import com.nutriapp.MaintainWeight;
 import com.nutriapp.User;
 
 public class UserCSV {
@@ -40,7 +46,7 @@ public class UserCSV {
 
         // write the user to the file
         FileWriter writer = new FileWriter("data/users.csv", true);
-        writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal() + "," + user.getFoods() + "," + user.getWorkoutStrategy() + "," + user.getDayLength() + System.lineSeparator());
+        writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal() + System.lineSeparator());
         writer.close();
         return 1;
     }
@@ -61,6 +67,9 @@ public class UserCSV {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] parts = line.split(",");
+                if (parts.length < 2) {
+                    continue;
+                }
                 if (!parts[0].equals(user.getName())) {
                     newFileContent.append(line).append(System.lineSeparator());
                 } else {
@@ -105,7 +114,7 @@ public class UserCSV {
                 String[] parts = line.split(",");
                 if (parts[0].equals(user.getName())) {
                     userExists = true;
-                    newFileContent.append(updatedUser.getName() + "," + updatedUser.getHeight() + "," + updatedUser.getWeight() + "," + updatedUser.getBirthdate() + "," + updatedUser.getGoal() + "," + updatedUser.getDayLength()).append(System.lineSeparator());
+                    newFileContent.append(updatedUser.getName() + "," + updatedUser.getHeight() + "," + updatedUser.getWeight() + "," + updatedUser.getBirthdate() + "," + updatedUser.getGoal() + System.lineSeparator());
                 } else {
                     newFileContent.append(line).append(System.lineSeparator());
                 }
@@ -126,6 +135,46 @@ public class UserCSV {
         }
 
         return 1;
+    }
+
+    public static User getUser(String username) {
+        // check if file exists, return null if it doesn't
+        File file = new File("data/users.csv");
+        if (!file.exists()) {
+            return null;
+        }
+
+        try {
+            // Read the file and return the user with the matching username
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                if (parts[0].equals(username)) {
+                    scanner.close();
+
+                    // convert parts[4] to Goal
+                    Goal usergoal;
+                    if (parts[4].equals("Lose Weight")) {
+                        usergoal = new LoseWeight();
+                    } else if (parts[4].equals("Maintain Weight")) {
+                        usergoal = new MaintainWeight();
+                    } else if (parts[4].equals("Gain Weight")) {
+                        usergoal = new GainWeight();
+                    } else {
+                        usergoal = new MaintainWeight();
+                    }
+
+                    return new User(parts[0], Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), LocalDate.parse(parts[3]), usergoal);
+                }
+            }
+            scanner.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

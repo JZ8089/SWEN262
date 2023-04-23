@@ -36,7 +36,7 @@ public class NutriAppUI {
     public void loginUser() {
         System.out.print("Enter your username: ");
         String username = scanner.next();
-        User user = findUserByUsername(username);
+        User user = UserCSV.getUser(username);
         if (user == null) {
             System.out.println("User not found. Please try again.");
             loginUser();
@@ -45,17 +45,6 @@ public class NutriAppUI {
             System.out.println("Logged in as: " + currentUser.getName());
             checkDailyLogin();
         }
-    }
-
-    private User findUserByUsername(String username) {
-        // You can implement this method to find a user by their username in the database.
-        // For now, I'll just search the local 'users' list.
-        for (User user : users) {
-            if (user.getName().equals(username)) {
-                return user;
-            }
-        }
-        return null;
     }
 
     private void checkDailyLogin() {
@@ -100,7 +89,7 @@ public class NutriAppUI {
         String birthdate = scanner.next();
         // Save the user data to the database
         LocalDate birthDate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        User user = new User(name, height, weight, birthDate, null, null, null, 86400);
+        User user = new User(name, height, weight, birthDate, null);
         try {
             UserCSV.createUser(user);
             users.add(user);
@@ -165,7 +154,7 @@ public class NutriAppUI {
         double time = scanner.nextDouble();
 
         // Save the workout duration to the database
-        User updatedUser = new User(user.getName(), user.getHeight(), user.getWeight(),user.getBirthdate(), user.getGoal(), user.getFoods(), user.getWorkoutStrategy(), time);
+        User updatedUser = new User(user.getName(), user.getHeight(), user.getWeight(),user.getBirthdate(), user.getGoal());
         UserCSV.updateUser(updatedUser, user);
     }
 

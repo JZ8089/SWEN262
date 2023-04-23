@@ -9,7 +9,7 @@ import java.io.*;
  * This class is responsible for saving and deleting meals to a CSV file.
  * it implements the MealDAO interface.
  */
-public class MealCSV implements MealDAO {
+public class MealCSV {
     private static String filePath;
 
     public MealCSV(String filePath) {
@@ -25,8 +25,7 @@ public class MealCSV implements MealDAO {
         }
     }
 
-    @Override
-    public void deleteMeal(Meal meal) {
+    public static void deleteMeal(Meal meal) {
         try {
             File inputFile = new File(filePath);
             File tempFile = new File("temp.csv");
