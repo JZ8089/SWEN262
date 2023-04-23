@@ -201,7 +201,7 @@ public class NutriAppUI {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(ingredient);
         IngredientCSV.saveIngredients(ingredients);
-            
+
         return ingredient;
     }
     
@@ -273,7 +273,29 @@ public class NutriAppUI {
     }
 
     public void logExercise() {
-        // Implement the logic for logging an exercise
+        int choice = 0;
+        while (choice != 4) {
+            System.out.println("\nExercise Submenu:");
+            System.out.println("1. Total time spent");
+            System.out.println("2. Track current exercise time");;
+            System.out.println("5. Go back to main menu");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    displayUserForm(0); // Total time spent
+                    break;
+                case 2:
+                    displayUserForm(1); // Track current exercise time
+                    break;
+                case 3:
+                    return; // Go back to main menu
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
+
     }
 
     public void displayCalories() {
