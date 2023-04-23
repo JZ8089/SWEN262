@@ -9,9 +9,9 @@ import com.nutriapp.Recipe;
  * This class is responsible for saving and loading recipes to a CSV file.
  */
 public class RecipeCSV {
-    private static final String FILENAME = "recipes.csv";
+    private static final String FILENAME = "data/recipes.csv";
 
-    public void saveRecipes(List<Recipe> recipes) {
+    public static void saveRecipes(List<Recipe> recipes) {
         try (FileWriter fw = new FileWriter(FILENAME);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
@@ -23,19 +23,18 @@ public class RecipeCSV {
         }
     }
 
-    public List<Recipe> loadRecipes() {
-        List<Recipe> recipes = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+    // listRecipes() returns a list of recipes as an array of strings, one recipe per string
+    public static String[] listRecipes() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
+            List<String> recipes = new ArrayList<>();
             String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                Recipe recipe = new Recipe(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2]), Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
-                recipe.setStock(Integer.parseInt(values[6]));
-                recipes.add(recipe);
+            while ((line = reader.readLine()) != null) {
+                recipes.add(line);
             }
+            return recipes.toArray(new String[0]);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return recipes;
+        return null;
     }
 }

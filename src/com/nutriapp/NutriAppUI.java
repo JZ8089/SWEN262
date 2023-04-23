@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.nutriapp.db.IngredientCSV;
 import com.nutriapp.db.MealCSV;
+import com.nutriapp.db.RecipeCSV;
 import com.nutriapp.db.UserCSV;
 
 public class NutriAppUI {
@@ -148,12 +150,122 @@ public class NutriAppUI {
         }
     }
 
-    public void handleRecipesSubmenu() {
-        // Implement the logic for the recipes submenu
-    }
-
     public void handleIngredientsSubmenu() {
-        // Implement the logic for the ingredients submenu
+        System.out.println("Ingredient Submenu");
+        System.out.println("1. Create an ingredient");
+        System.out.println("2. View all ingredients");
+        System.out.println("3. Go back to main menu");
+    
+        int choice = getUserChoice();
+        switch (choice) {
+            case 1:
+                displayIngredientForm();
+                break;
+            case 2:
+                // IngredientCSV.listIngredients() returns an array of strings, so we need to print each element
+                String[] ingredients = IngredientCSV.listIngredients();
+                for (String ingredient : ingredients) {
+                    System.out.println(ingredient);
+                }
+                break;
+            case 3:
+                break;
+            default:
+                System.out.println("Invalid choice, please try again.");
+        }
+    }
+    
+    public Ingredient displayIngredientForm() {
+        System.out.println("Create a new ingredient");
+        System.out.print("Enter the name of the ingredient: ");
+        String name = scanner.next();
+        System.out.print("Enter the calories per unit: ");
+        int caloriesPerUnit = scanner.nextInt();
+        System.out.print("Enter the fat per unit: ");
+        int fatPerUnit = scanner.nextInt();
+        System.out.print("Enter the protein per unit: ");
+        int proteinPerUnit = scanner.nextInt();
+        System.out.print("Enter the fiber per unit: ");
+        int fiberPerUnit = scanner.nextInt();
+        System.out.print("Enter the carbs per unit: ");
+        int carbsPerUnit = scanner.nextInt();
+        System.out.print("Enter the stock amount: ");
+        int stock = scanner.nextInt();
+    
+        Ingredient ingredient = new Ingredient(name, caloriesPerUnit, fatPerUnit, proteinPerUnit, fiberPerUnit, carbsPerUnit, stock);
+    
+        // Save the ingredient data to the database
+        // create a list of ingredients
+        // add the ingredient to the list
+        // save the list to the database
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(ingredient);
+        IngredientCSV.saveIngredients(ingredients);
+            
+        return ingredient;
+    }
+    
+    public void handleRecipesSubmenu() {
+        System.out.println("Recipe Submenu");
+        System.out.println("1. Create a recipe");
+        System.out.println("2. View all recipes");
+        System.out.println("3. Go back to main menu");
+    
+        int choice = getUserChoice();
+        switch (choice) {
+            case 1:
+                displayRecipeForm();
+                break;
+            case 2:
+                // RecipeCSV.listRecipes();  returns an array of strings, so we need to print each element
+                String[] recipes = RecipeCSV.listRecipes();
+                for (String recipe : recipes) {
+                    System.out.println(recipe);
+                }
+                break;
+            case 3:
+                break;
+            default:
+                System.out.println("Invalid choice, please try again.");
+        }
+    }
+    
+    public void displayRecipeForm() {
+        System.out.println("Create a new recipe");
+        System.out.print("Enter the name of the recipe: ");
+        String name = scanner.next();
+        System.out.print("Enter the calories per unit: ");
+        int caloriesPerUnit = scanner.nextInt();
+        System.out.print("Enter the fat per unit: ");
+        int fatPerUnit = scanner.nextInt();
+        System.out.print("Enter the protein per unit: ");
+        int proteinPerUnit = scanner.nextInt();
+        System.out.print("Enter the fiber per unit: ");
+        int fiberPerUnit = scanner.nextInt();
+        System.out.print("Enter the carbs per unit: ");
+        int carbsPerUnit = scanner.nextInt();
+    
+        Recipe recipe = new Recipe(name, caloriesPerUnit, fatPerUnit, proteinPerUnit, fiberPerUnit, carbsPerUnit);
+        
+        // Adding ingredients to the recipe
+        boolean addingIngredients = true;
+        while (addingIngredients) {
+            System.out.println("Add an ingredient to the recipe:");
+            // Call displayIngredientForm() function to create a new ingredient
+            // You may need to modify this function to return the created ingredient
+            Ingredient ingredient = displayIngredientForm();
+            recipe.addIngredient(ingredient);
+    
+            System.out.println("Would you like to add another ingredient? (y/n)");
+            String userInput = scanner.next();
+            if (userInput.equalsIgnoreCase("n")) {
+                addingIngredients = false;
+            }
+        }
+        // make recipe into a list of recipes containing just the recipe
+        List<Recipe> recipeList = new ArrayList<>();
+        recipeList.add(recipe);
+        RecipeCSV.saveRecipes(recipeList);
     }
 
     public void logMeal() {
