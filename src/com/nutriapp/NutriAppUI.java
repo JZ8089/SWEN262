@@ -269,7 +269,28 @@ public class NutriAppUI {
     }
 
     public void logMeal() {
-        // Implement the logic for logging a meal
+        int choice = 0;
+        while (choice != 4) {
+            System.out.println("\nMeal Submenu:");
+            System.out.println("1. Enter date to get records of meal(s) consumed");
+            System.out.println("2. Meal consumed today");;
+            System.out.println("3. Go back to main menu");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    displayUserForm(0); // Date
+                    break;
+                case 2:
+                    displayUserForm(1); // Meal consumed
+                    break;
+                case 3:
+                    return; // Go back to main menu
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
     }
 
     public void logExercise() {
@@ -278,7 +299,7 @@ public class NutriAppUI {
             System.out.println("\nExercise Submenu:");
             System.out.println("1. Total time spent");
             System.out.println("2. Track current exercise time");;
-            System.out.println("5. Go back to main menu");
+            System.out.println("3. Go back to main menu");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
