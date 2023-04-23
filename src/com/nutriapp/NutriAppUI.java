@@ -134,7 +134,11 @@ public class NutriAppUI {
                     displayMealForm();
                     break;
                 case 2:
-                    // Implement the logic for listing all meals
+                    // MealCSV.listMeals() returns an array of strings, so we need to print each element
+                    String[] meals = MealCSV.listMeals();
+                    for (String meal : meals) {
+                        System.out.println(meal);
+                    }
                     break;
                 case 3:
                     return; // Go back to main menu
