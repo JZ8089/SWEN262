@@ -24,7 +24,7 @@ public class NutriAppUI {
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
         if (choice == 1) {
-            displayUserForm();
+            displayUserForm(0);
         } else if (choice == 2) {
             loginUser();
         } else {
@@ -63,13 +63,18 @@ public class NutriAppUI {
     }
 
     public void displayMenu() {
-        System.out.println("Welcome to NutriApp!");
-        System.out.println("1. Create a new user");
-        System.out.println("2. Add a new meal");
-        System.out.println("3. Add a new workout");
-        System.out.println("4. Add length of day in seconds");
-        System.out.println("5. View user history");
-        System.out.println("6. Exit");
+        System.out.println("\nDATABASE CONTROLS:");
+        System.out.println("1. User");
+        System.out.println("2. Meals");
+        System.out.println("3. Recipes");
+        System.out.println("4. Ingredients");
+        System.out.println("5. History");
+        System.out.println("\nNUTRIAPP FUNCTIONS:");
+        System.out.println("6. Log meal");
+        System.out.println("7. Log exercise");
+        System.out.println("8. Show calories consumed vs daily goal");
+        System.out.println("9. Show current time and date");
+        System.out.println("10. Exit");
     }
 
     public int getUserChoice() {
@@ -77,25 +82,142 @@ public class NutriAppUI {
         return scanner.nextInt();
     }
 
-    public void displayUserForm() {
-        System.out.println("Create a new user");
-        System.out.print("Enter your name: ");
-        String name = scanner.next();
-        System.out.print("Enter your height (feet): ");
-        double height = scanner.nextDouble();
-        System.out.print("Enter your weight (lbs): ");
-        double weight = scanner.nextDouble();
-        System.out.print("Enter your birthdate (YYYY-MM-DD): ");
-        String birthdate = scanner.next();
-        // Save the user data to the database
-        LocalDate birthDate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        User user = new User(name, height, weight, birthDate, null);
-        try {
-            UserCSV.createUser(user);
-            users.add(user);
+    public void handleUserSubmenu() {
+        int choice = 0;
+        while (choice != 4) {
+            System.out.println("\nUser Submenu:");
+            System.out.println("1. Create a new user");
+            System.out.println("2. Update a user");
+            System.out.println("3. Remove a user");
+            System.out.println("4. List all users");
+            System.out.println("5. Go back to main menu");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    displayUserForm(0); // Create a new user
+                    break;
+                case 2:
+                    displayUserForm(1); // Update a user
+                    break;
+                case 3:
+                    displayUserForm(2); // Remove a user
+                    break;
+                case 4:
+                    // UserCSV.listUsers() returns an array of strings, so we need to print each element
+                    String[] users = UserCSV.listUsers();
+                    for (String user : users) {
+                        System.out.println(user);
+                    }
+                    break;
+                case 5:
+                    return; // Go back to main menu
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
         }
-        catch (IOException e) { e.printStackTrace(); }
     }
+
+    public void handleMealsSubmenu() {
+        int choice = 0;
+        while (choice != 3) {
+            System.out.println("\nMeals Submenu:");
+            System.out.println("1. Create a new meal");
+            System.out.println("2. List all meals");
+            System.out.println("3. Go back to main menu");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    displayMealForm();
+                    break;
+                case 2:
+                    // Implement the logic for listing all meals
+                    break;
+                case 3:
+                    return; // Go back to main menu
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
+    }
+
+    public void handleRecipesSubmenu() {
+        // Implement the logic for the recipes submenu
+    }
+
+    public void handleIngredientsSubmenu() {
+        // Implement the logic for the ingredients submenu
+    }
+
+    public void logMeal() {
+        // Implement the logic for logging a meal
+    }
+
+    public void logExercise() {
+        // Implement the logic for logging an exercise
+    }
+
+    public void displayCalories() {
+        // Placeholder for displaying calories consumed vs daily goal
+        System.out.println("Calories consumed: 1200");
+        System.out.println("Daily calorie goal: 2000");
+    }
+
+    public void displayCurrentTimeAndDate() {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("Current date and time: " + now);
+    }
+
+    public void displayUserForm(int action) {
+        if (action == 0) {
+            System.out.println("Create a new user");
+        } else if (action == 1) {
+            System.out.println("Update a user");
+        } else if (action == 2) {
+            System.out.println("Remove a user");
+        }
+    
+        System.out.print("Enter the user's name: ");
+        String name = scanner.next();
+    
+        if (action == 2) {
+            // Remove the user with the given name
+            try {
+                UserCSV.removeUser(name);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+    
+        System.out.print("Enter the user's height (feet): ");
+        double height = scanner.nextDouble();
+        System.out.print("Enter the user's weight (lbs): ");
+        double weight = scanner.nextDouble();
+        System.out.print("Enter the user's birthdate (YYYY-MM-DD): ");
+        String birthdate = scanner.next();
+        System.out.print("Enter the user's goal weight (lbs): ");
+        int goalWeight = scanner.nextInt();
+    
+        LocalDate birthDate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        User user = new User(name, height, weight, birthDate, goalWeight);
+    
+        try {
+            if (action == 0) {
+                // Create the user
+                UserCSV.createUser(user);
+                users.add(user);
+            } else if (action == 1) {
+                UserCSV.updateUser(user, user);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     public void displayMealForm() {
         System.out.println("Add a new meal");
@@ -154,7 +276,7 @@ public class NutriAppUI {
         double time = scanner.nextDouble();
 
         // Save the workout duration to the database
-        User updatedUser = new User(user.getName(), user.getHeight(), user.getWeight(),user.getBirthdate(), user.getGoal());
+        User updatedUser = new User(user.getName(), user.getHeight(), user.getWeight(),user.getBirthdate(), user.getGoalWeight());
         UserCSV.updateUser(updatedUser, user);
     }
 

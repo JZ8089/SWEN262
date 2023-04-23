@@ -14,26 +14,38 @@ public class Nutriapp {
     public void run() {
         ui.initialPrompt();
         int choice = 0;
-        while (choice != 6) {
+        while (choice != 10) {
             ui.displayMenu();
             choice = ui.getUserChoice();
             switch (choice) {
                 case 1:
-                    ui.displayUserForm();
+                    ui.handleUserSubmenu();
                     break;
                 case 2:
-                    ui.displayMealForm();
+                    ui.handleMealsSubmenu();
                     break;
                 case 3:
-                    ui.displayWorkoutForm();
+                    ui.handleRecipesSubmenu();
                     break;
-                case 4: 
-                    ui.displayHoursLeftInDay();
+                case 4:
+                    ui.handleIngredientsSubmenu();
                     break;
                 case 5:
                     ui.displayUserHistory();
                     break;
                 case 6:
+                    ui.logMeal();
+                    break;
+                case 7:
+                    ui.logExercise();
+                    break;
+                case 8:
+                    ui.displayCalories();
+                    break;
+                case 9:
+                    ui.displayCurrentTimeAndDate();
+                    break;
+                case 10:
                     ui.displayExitMessage();
                     break;
                 default:

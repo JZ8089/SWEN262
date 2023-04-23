@@ -21,6 +21,7 @@ public class User implements StockObserver {
     private double weight;
     private LocalDate birthdate;
     private Goal goal;
+    private int goalWeight;
     private double dailyCalorieIntake;
     private List<Food> foods;
     private List<WeightObserver> weightObservers;
@@ -28,7 +29,7 @@ public class User implements StockObserver {
     private List<ShoppingListObserver> shoppingListObservers;
     private int dayLength;
 
-    public User(String name, double height, double weight, LocalDate birthdate, Goal goal) {
+    public User(String name, double height, double weight, LocalDate birthdate, int goal) {
         this.name = name;
         this.height = height;
         this.weight = weight;
@@ -37,7 +38,15 @@ public class User implements StockObserver {
         this.weightObservers = new ArrayList<>();
         // this.workoutStrategy = workoutStrategy;
         this.shoppingListObservers = new ArrayList<>();
-        this.goal = goal;
+        // if the goal is less than their weight, they want to lose weight
+        if (goal < weight) {
+            this.goal = new LoseWeight();
+        } else if (goal > weight) {
+            this.goal = new GainWeight();
+        } else {
+            this.goal = new MaintainWeight();
+        }
+        this.goalWeight = goal;
         // this.goal.update(this);
     }
 
@@ -59,6 +68,10 @@ public class User implements StockObserver {
 
     public Goal getGoal() {
         return goal;
+    }
+
+    public int getGoalWeight() {
+        return goalWeight;
     }
 
     public int getAge() {

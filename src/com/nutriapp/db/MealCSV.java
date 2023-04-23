@@ -3,6 +3,8 @@ package com.nutriapp.db;
 import com.nutriapp.Meal;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /* 
@@ -10,7 +12,7 @@ import java.io.*;
  * it implements the MealDAO interface.
  */
 public class MealCSV {
-    private static String filePath;
+    private static String filePath = "data/meals.csv";
 
     public MealCSV(String filePath) {
         MealCSV.filePath = filePath;
@@ -28,7 +30,7 @@ public class MealCSV {
     public static void deleteMeal(Meal meal) {
         try {
             File inputFile = new File(filePath);
-            File tempFile = new File("temp.csv");
+            File tempFile = new File("data/temp.csv");
 
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
@@ -51,25 +53,18 @@ public class MealCSV {
         }
     }
 
-    // public List<Meal> getAll() {
-    //     List<Meal> meals = new ArrayList<>();
-    //     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-    //         String line;
-    //         while ((line = reader.readLine()) != null) {
-    //             String[] parts = line.split(",");
-    //             String name = parts[0];
-    //             int caloriesPerUnit = Integer.parseInt(parts[1]);
-    //             int fatPerUnit = Integer.parseInt(parts[2]);
-    //             int proteinPerUnit = Integer.parseInt(parts[3]);
-    //             int fiberPerUnit = Integer.parseInt(parts[4]);
-    //             int carbsPerUnit = Integer.parseInt(parts[5]);
-
-    //             Meal meal = new Meal(name, caloriesPerUnit, fatPerUnit, proteinPerUnit, fiberPerUnit, carbsPerUnit);
-    //             meals.add(meal);
-    //         }
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return meals;
-    // }
+    // function that returns a list of meals as array of strings, one meal per string
+    public static String[] listMeals() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            List<String> meals = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                meals.add(line);
+            }
+            return meals.toArray(new String[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

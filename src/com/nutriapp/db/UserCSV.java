@@ -46,12 +46,12 @@ public class UserCSV {
 
         // write the user to the file
         FileWriter writer = new FileWriter("data/users.csv", true);
-        writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoal() + System.lineSeparator());
+        writer.write(user.getName() + "," + user.getHeight() + "," + user.getWeight() + "," + user.getBirthdate() + "," + user.getGoalWeight() + System.lineSeparator());
         writer.close();
         return 1;
     }
 
-    public static int removeUser(User user) {
+    public static int removeUser(String username) throws IOException {
         // check if file exists, return 0 if it doesn't
         File file = new File("data/users.csv");
         if (!file.exists()) {
@@ -70,7 +70,7 @@ public class UserCSV {
                 if (parts.length < 2) {
                     continue;
                 }
-                if (!parts[0].equals(user.getName())) {
+                if (!parts[0].equals(username)) {
                     newFileContent.append(line).append(System.lineSeparator());
                 } else {
                     userExists = true;
@@ -114,7 +114,7 @@ public class UserCSV {
                 String[] parts = line.split(",");
                 if (parts[0].equals(user.getName())) {
                     userExists = true;
-                    newFileContent.append(updatedUser.getName() + "," + updatedUser.getHeight() + "," + updatedUser.getWeight() + "," + updatedUser.getBirthdate() + "," + updatedUser.getGoal() + System.lineSeparator());
+                    newFileContent.append(updatedUser.getName() + "," + updatedUser.getHeight() + "," + updatedUser.getWeight() + "," + updatedUser.getBirthdate() + "," + updatedUser.getGoalWeight() + System.lineSeparator());
                 } else {
                     newFileContent.append(line).append(System.lineSeparator());
                 }
@@ -153,19 +153,7 @@ public class UserCSV {
                 if (parts[0].equals(username)) {
                     scanner.close();
 
-                    // convert parts[4] to Goal
-                    Goal usergoal;
-                    if (parts[4].equals("Lose Weight")) {
-                        usergoal = new LoseWeight();
-                    } else if (parts[4].equals("Maintain Weight")) {
-                        usergoal = new MaintainWeight();
-                    } else if (parts[4].equals("Gain Weight")) {
-                        usergoal = new GainWeight();
-                    } else {
-                        usergoal = new MaintainWeight();
-                    }
-
-                    return new User(parts[0], Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), LocalDate.parse(parts[3]), usergoal);
+                    return new User(parts[0], Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), LocalDate.parse(parts[3]), Integer.parseInt(parts[4]));
                 }
             }
             scanner.close();
@@ -176,5 +164,41 @@ public class UserCSV {
 
         return null;
     }
+
+    // function to list all users, returns a string array of all users and their information
+    public static String[] listUsers() {
+        // check if file exists, return null if it doesn't
+        File file = new File("data/users.csv");
+        if (!file.exists()) {
+            return null;
+        }
+
+        String[] users = new String[0];
+
+        try {
+            // Read the file and store its content in a string array
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                if (parts.length < 2) {
+                    continue;
+                }
+                String[] newUsers = new String[users.length + 1];
+                for (int i = 0; i < users.length; i++) {
+                    newUsers[i] = users[i];
+                }
+                newUsers[newUsers.length - 1] = line;
+                users = newUsers;
+            }
+            scanner.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+   
 
 }
